@@ -47,7 +47,7 @@
         </activity>
 
         <activity
-            android:name=".MostraConvData"
+            android:name=".ListPessoasData"
             android:exported="true">
         </activity>
 
@@ -56,8 +56,13 @@
             android:exported="true"/>
 
         <activity
-            android:name=".MostraConversas"
+            android:name=".MostraConversasData"
             android:exported="true"/>
+
+        <activity
+            android:name=".MostrarTodasConv"
+            android:exported="true"/>
+
 
         <activity
             android:name=".MainActivity"

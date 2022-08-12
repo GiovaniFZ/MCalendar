@@ -33,7 +33,6 @@ public class ListaPessoas extends AppCompatActivity {
     ListView listViewPessoas;
     ArrayList<Integer> arrayIds;
     SQLiteDatabase db;
-    int idSelecionado;
 
     private static final String BANCO_NOME = "bd_pessoa";
     private static final String NOME_TABELA = "tb_pessoa";
@@ -66,9 +65,9 @@ public class ListaPessoas extends AppCompatActivity {
 
         listViewPessoas.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                String MsgMandada = AbreMensagem(position);
-                Intent intent2 = new Intent(getApplicationContext(), MostraConversas.class);
-                intent2.putExtra("MsgMandada", MsgMandada);
+                String msgMandada = AbreMensagem(position);
+                Intent intent2 = new Intent(getApplicationContext(), MostrarTodasConv.class);
+                intent2.putExtra("msgMandada", msgMandada);
                 startActivity(intent2);
             }
         });
@@ -164,10 +163,10 @@ public class ListaPessoas extends AppCompatActivity {
 
     public String AbreMensagem(int position){
         ListarPessoas();
-        String query = "SELECT " + COLUNA_CODIGO + ", " + COLUNA_NOME + ", " + COLUNA_MENSAGENS + " FROM " + NOME_TABELA;
+        String query = "SELECT "+ COLUNA_MENSAGENS + " FROM " + NOME_TABELA;
         Cursor cur = db.rawQuery(query, null);
         cur.moveToPosition(position);
-        String Msg = cur.getString(2);
+        String Msg = cur.getString(position);
         return Msg;
     }
 }

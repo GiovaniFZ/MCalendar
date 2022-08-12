@@ -19,4 +19,5 @@
     <string name="digite_o_novo_nome_da_pessoa">Digite o novo nome da pessoa...</string>
     <string name="criar">Criar</string>
     <string name="erroum">Nenhum conteudo a ser exibido!</string>
+    <string name="nada_a_ser_mostrado_importe_mensagens">Nada a ser mostrado! Importe mensagens.</string>
 </resources>

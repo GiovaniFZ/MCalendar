@@ -10,11 +10,9 @@ import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.DatePicker;
-import android.widget.TextView;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
-import java.text.DateFormat;
 import java.util.Calendar;
 
 public class MainActivity extends AppCompatActivity implements DatePickerDialog.OnDateSetListener {
@@ -56,7 +54,7 @@ public class MainActivity extends AppCompatActivity implements DatePickerDialog.
         c.set(Calendar.YEAR, year);
         c.set(Calendar.MONTH, month);
         c.set(Calendar.DAY_OF_MONTH, day);
-        Intent intent = new Intent(this, MostraConvData.class);
+        Intent intent = new Intent(this, ListPessoasData.class);
         intent.putExtra("day", day);
         intent.putExtra("month", month);
         intent.putExtra("year", year);

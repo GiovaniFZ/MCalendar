@@ -3,24 +3,26 @@ package com.fetin.calendarone;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.database.sqlite.SQLiteStatement;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
-import android.widget.Toast;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.ArrayList;
+import java.util.regex.Pattern;
 
-public class SelecionarPessoa extends AppCompatActivity {
+public class ListPessoasData extends AppCompatActivity {
+
+    // Variaveis globais
+    SQLiteDatabase db;
     ListView listViewPessoas;
     ArrayList<Integer> arrayIds;
-    SQLiteDatabase db;
-    public Integer idSelecionado;
 
+    // Definicoes do banco de dados
     private static final String BANCO_NOME = "bd_pessoa";
     private static final String NOME_TABELA = "tb_pessoa";
     private static final String COLUNA_NOME = "Nome";
@@ -33,24 +35,46 @@ public class SelecionarPessoa extends AppCompatActivity {
         listViewPessoas = findViewById(R.id.listViewPessoas2);
 
         Intent intent = getIntent();
-        String Mensagem = intent.getStringExtra("sharedText");
-        ListarPessoas();
+        int dia = intent.getIntExtra("day", 0);
+        int mes = intent.getIntExtra("month", 0);
+        int ano = intent.getIntExtra("year", 0);
+
+        // Janeiro é tratado como zero
+        mes += 1;
+        // Anos nos txts to Whatsapp são tratados com os ultimos dois digitos do ano.
+        if(ano > 2000) {
+            ano = ano - 2000;
+        }else
+            if(ano > 1900){
+                ano = ano - 1900;
+            }
+
+        // Transformando os dados em strings para comparação
+        String diaToString = Integer.toString(dia);
+        String mesToString = Integer.toString(mes);
+        String anoToString = Integer.toString(ano);
+
+        String dataComparar = mesToString + "/" + diaToString + "/" + anoToString;
+
+        ListarPessoas2(dataComparar);
+
         listViewPessoas.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                idSelecionado = arrayIds.get(position);
-                adicionarMensagem(idSelecionado, Mensagem);
-                Toast.makeText(SelecionarPessoa.this, "Mensagens adicionadas!", Toast.LENGTH_LONG).show();
-                Intent intent2 = new Intent(getApplicationContext(), MainActivity.class);
+                Intent intent2 = new Intent(getApplicationContext(), MostraConversasData.class);
+                intent2.putExtra("dataComparar", dataComparar);
+                intent2.putExtra("position", position);
                 startActivity(intent2);
             }
         });
+
     }
 
-    public void ListarPessoas(){
+    public void ListarPessoas2(String dataComparar){
         try {
             arrayIds = new ArrayList<>();
             db = openOrCreateDatabase(BANCO_NOME, MODE_PRIVATE, null);
-            String query = "SELECT " + COLUNA_CODIGO + ", " + COLUNA_NOME + " FROM " + NOME_TABELA;
+            String query = "SELECT " + COLUNA_CODIGO + ", " + COLUNA_NOME + " FROM " + NOME_TABELA + " WHERE " +
+                    COLUNA_MENSAGENS + " LIKE '%" + dataComparar + "%'";
             Cursor meuCursor = db.rawQuery(query, null);
             ArrayList<String> linhas = new ArrayList<String>();
             ArrayAdapter adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, android.R.id.text1, linhas
@@ -62,21 +86,9 @@ public class SelecionarPessoa extends AppCompatActivity {
                 arrayIds.add(meuCursor.getInt(0));
                 meuCursor.moveToNext();
             }
+
         }catch (Exception e){
             e.printStackTrace();
         }
-    }
-    public void adicionarMensagem(int id, String Mensagem){
-        try{
-        db = openOrCreateDatabase(BANCO_NOME, MODE_PRIVATE, null);
-        String sql = "UPDATE " + NOME_TABELA + " SET " + COLUNA_MENSAGENS + "=? WHERE " + COLUNA_CODIGO + "=?";
-        SQLiteStatement stmt = db.compileStatement(sql);
-        stmt.bindString(1, Mensagem);
-        stmt.bindLong(2, id);
-        stmt.executeUpdateDelete();
-        db.close();
-    } catch (Exception e) {
-        e.printStackTrace();
-    }
     }
 }
