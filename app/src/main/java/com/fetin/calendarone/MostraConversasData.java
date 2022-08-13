@@ -34,9 +34,7 @@ public class MostraConversasData extends AppCompatActivity {
         msgMostr.setMovementMethod(new ScrollingMovementMethod());
 
         Cursor cur = db.rawQuery(query, null);
-        if (cur.getCount() == 0) {
-            Toast.makeText(this, "Nenhuma mensagem mandada!", Toast.LENGTH_SHORT).show();
-        }
+
             if (cur.moveToFirst()) {
                 do {
                     mensagem = cur.getString(posicao);

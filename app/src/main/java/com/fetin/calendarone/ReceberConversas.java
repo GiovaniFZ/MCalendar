@@ -20,29 +20,35 @@ import java.util.Scanner;
 
 public class ReceberConversas extends AppCompatActivity {
     TextView texto2;
+
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_conversas);
 
+        texto2 = findViewById(R.id.TextoRecebido);
+
         Intent intent = getIntent();
-        String action = intent.getAction();
-        String type = intent.getType();
+        String action = intent.getAction(); // Action: intent.action.SEND_MULTIPLE();
+        String type = intent.getType(); // Type: text/*
+
         handleSend(intent);
     }
 
         void handleSend (Intent intent){
             Uri fileUri = intent.getParcelableExtra(Intent.EXTRA_STREAM);
             if (fileUri != null) {
-                /*try {
+                try {
                     InputStream t = getContentResolver().openInputStream(fileUri);
                     String res = lerUri(t);
                     texto2.setText(res);
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
-                 */
                 String caminho = fileUri.getPath();
                 texto2.setText(caminho);
+            }
+            else{
+                texto2.setText("O caminho nao existe.");
             }
         }
 
@@ -50,5 +56,6 @@ public class ReceberConversas extends AppCompatActivity {
             Scanner s = new Scanner(inputStream).useDelimiter("\\A");
             String result = s.hasNext() ? s.next() : "";
             return result;
-        }
+
     }
+}

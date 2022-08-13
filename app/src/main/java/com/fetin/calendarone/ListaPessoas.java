@@ -161,12 +161,21 @@ public class ListaPessoas extends AppCompatActivity {
         }
     }
 
+
+    @SuppressLint("Range")
     public String AbreMensagem(int position){
         ListarPessoas();
+        db = openOrCreateDatabase(BANCO_NOME, MODE_PRIVATE, null);
         String query = "SELECT "+ COLUNA_MENSAGENS + " FROM " + NOME_TABELA;
         Cursor cur = db.rawQuery(query, null);
         cur.moveToPosition(position);
-        String Msg = cur.getString(position);
-        return Msg;
-    }
+        String Mensagem = cur.getString(cur.getColumnIndex(COLUNA_MENSAGENS));
+        if(Mensagem == null){
+            Toast.makeText(ListaPessoas.this, "Nada a ser mostrado! Importe mensagens.", Toast.LENGTH_LONG).show();
+            return null;
+        }
+        else{
+            return Mensagem;
+        }
+        }
 }
