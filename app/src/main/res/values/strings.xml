@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">Calendarone java</string>
-    <string name="Select">Selecionar...</string>
-    <string name="TextoData">Selecione uma data!</string>
+    <string name="Select">Selecionar data</string>
+    <string name="TextoData">Bem vindo. Crie uma pessoa, abra um arquivo txt ou selecione uma data!</string>
     <string name="title_activity_conversas">Conversas</string>
     <!-- Strings used for fragments for navigation -->
     <string name="first_fragment_label">First Fragment</string>
@@ -20,4 +20,5 @@
     <string name="criar">Criar</string>
     <string name="erroum">Nenhum conteudo a ser exibido!</string>
     <string name="nada_a_ser_mostrado_importe_mensagens">Nada a ser mostrado! Importe mensagens.</string>
+    <string name="abrir_arquivo">Abrir txt</string>
 </resources>
