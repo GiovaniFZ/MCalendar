@@ -84,21 +84,5 @@ public class Conversas extends AppCompatActivity {
             }
         }
     }
-    public String lerTexto2(File sharedFile){
-        StringBuilder texto2 = new StringBuilder();
-        try {
-            BufferedReader br = new BufferedReader(new FileReader(sharedFile));
-            String linha;
-            while((linha = br.readLine()) != null){
-                texto2.append(linha);
-                texto2.append("\n");
-            }
-            br.close();
-        } catch(IOException e){
-            e.printStackTrace();
-        }
-        return texto2.toString();
-    }
-
 
 }

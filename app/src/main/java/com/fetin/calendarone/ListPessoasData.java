@@ -55,6 +55,7 @@ public class ListPessoasData extends AppCompatActivity {
         String anoToString = Integer.toString(ano);
 
         String dataComparar = mesToString + "/" + diaToString + "/" + anoToString;
+        String dataOrg = diaToString + "/" + mesToString + "/" + anoToString;
 
         ListarPessoas2(dataComparar);
 
@@ -62,6 +63,7 @@ public class ListPessoasData extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent intent2 = new Intent(getApplicationContext(), MostraConversasData.class);
                 intent2.putExtra("dataComparar", dataComparar);
+                intent2.putExtra("dataOrg", dataOrg);
                 intent2.putExtra("position", position);
                 startActivity(intent2);
             }
