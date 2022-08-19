@@ -13,6 +13,7 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.ArrayList;
+import java.util.Locale;
 import java.util.regex.Pattern;
 
 public class ListPessoasData extends AppCompatActivity {
@@ -35,27 +36,34 @@ public class ListPessoasData extends AppCompatActivity {
         listViewPessoas = findViewById(R.id.listViewPessoas2);
 
         Intent intent = getIntent();
+        String dataComparar;
+        String dataOrg;
+        // Obtendo dia, mes e ano
         int dia = intent.getIntExtra("day", 0);
         int mes = intent.getIntExtra("month", 0);
         int ano = intent.getIntExtra("year", 0);
 
-        // Janeiro é tratado como zero
+        // Janeiro é tratado como zero, no nosso app
         mes += 1;
-        // Anos nos txts to Whatsapp são tratados com os ultimos dois digitos do ano.
-        if(ano > 2000) {
-            ano = ano - 2000;
-        }else
-            if(ano > 1900){
-                ano = ano - 1900;
-            }
-
         // Transformando os dados em strings para comparação
         String diaToString = Integer.toString(dia);
         String mesToString = Integer.toString(mes);
         String anoToString = Integer.toString(ano);
 
-        String dataComparar = mesToString + "/" + diaToString + "/" + anoToString;
-        String dataOrg = diaToString + "/" + mesToString + "/" + anoToString;
+        if(Locale.getDefault().getDisplayLanguage().equals("English")) {
+            // Anos nos txts to Whatsapp são tratados com os ultimos dois digitos do ano, se estiver em ingles
+            int ano2 = ano - 2000;
+            anoToString = Integer.toString(ano2);
+            dataComparar = mesToString + "/" + diaToString + "/" + anoToString;
+            dataOrg = diaToString + "/" + mesToString + "/" + anoToString;
+            setTitle(dataOrg); // Colocando o titulo da activity como o dia selecionado
+        }else {
+            String mesPt = '0' + mesToString;
+            dataComparar = diaToString + "/" + mesPt + "/" + anoToString;
+            dataOrg = dataComparar;
+            setTitle(dataComparar);
+        }
+
 
         ListarPessoas2(dataComparar);
 

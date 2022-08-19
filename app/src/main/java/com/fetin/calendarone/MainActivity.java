@@ -8,6 +8,9 @@ import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.widget.Button;
 import android.widget.DatePicker;
 
@@ -29,6 +32,7 @@ public class MainActivity extends AppCompatActivity implements DatePickerDialog.
                 != PackageManager.PERMISSION_GRANTED) {
             requestPermissions(new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, PERMISSION_REQUEST_STORAGE);
         }
+
 
         b1.setOnClickListener(v -> {
             DialogFragment datePicker = new DatePickerFragment();
@@ -60,5 +64,24 @@ public class MainActivity extends AppCompatActivity implements DatePickerDialog.
         intent.putExtra("year", year);
         startActivity(intent);
     }
+
+    // Menus
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu_main, menu);
+        return true;
+    }
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle item selection
+        switch (item.getItemId()) {
+            case R.id.tutorial:
+                Intent intent = new Intent(this, Tutorial.class);
+                startActivity(intent);
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+
 
 }

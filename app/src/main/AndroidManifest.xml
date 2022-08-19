@@ -54,6 +54,9 @@
             android:name=".MostrarTodasConv"
             android:exported="true"/>
 
+        <activity
+            android:name=".Tutorial"
+            android:exported="true"/>
 
         <activity
             android:name=".MainActivity"

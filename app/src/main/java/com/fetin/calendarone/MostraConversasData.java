@@ -31,7 +31,8 @@ public class MostraConversasData extends AppCompatActivity {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_receber_conversas);
-        setTitle(dataOrg);
+
+        setTitle("Conversas em " + dataOrg);
 
         TextView msgMostr = findViewById(R.id.msgMostr);
         msgMostr.setMovementMethod(new ScrollingMovementMethod());
@@ -68,23 +69,18 @@ public class MostraConversasData extends AppCompatActivity {
             comparador = Character.compare(mensagem.charAt(i), '\n');
 
             if (i + comp <= mensagem.length()) {
-                Log.d("mostraMsgData: ", "i+comp eh maior que length: " + mensagem.substring(i, i + comp));
                 if (mensagem.substring(i, i+comp).equals(dataComparar)) { // Caso a data selecionada já esteja nos primeiros caracteres
                     encontrou = true;
-                    Log.d("mostraMsgData: ", "As datas da primeira linha são iguais");
                 }
             }
 
             if (comparador == 0 && i + comp <= mensagem.length()) { // Se houve quebra de linha
                 i++;
                 if (mensagem.substring(i, i + comp).equals(dataComparar)) { // Caso os proximos caracteres sejam a data selecionada
-                    Log.d("mostraMsgData: ", "As datas das linhas seguintes são iguais");
                     encontrou = true;
                     mensagem2.append('\n');
                 } else {
                     if (encontrou) {
-                        Log.d("mostraMsgData: ", "Entrou no break");
-                        Log.d("Substring da mensagem até i+7: ", mensagem.substring(i, i + comp));
                         break;
                     }
                 }

@@ -52,13 +52,15 @@ public class ListaPessoas extends AppCompatActivity {
         criarBancoDados();
         ListarPessoas();
 
+        setTitle("Lista de pessoas");
+
          criarBot.setOnClickListener(view -> {
             String NomeDigitado = CampoPessoa.getText().toString();
                     if (NomeDigitado.isEmpty()) {
                         Toast.makeText(this, "Insira o nome da pessoa!", Toast.LENGTH_SHORT).show();
                     } else {
                         criarPessoa(NomeDigitado);
-                        Toast.makeText(ListaPessoas.this, "Pessoa adicionada!", Toast.LENGTH_LONG).show();
+                        Toast.makeText(ListaPessoas.this, NomeDigitado +" adicionado(a)!", Toast.LENGTH_LONG).show();
                         ListarPessoas();
                     }
                 });
