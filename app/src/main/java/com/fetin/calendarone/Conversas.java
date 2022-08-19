@@ -41,15 +41,15 @@ public class Conversas extends AppCompatActivity {
 
         BuscarArquivo();
 
-        if(TextoFinal == null){
-            Intent intent3 = new Intent(getApplicationContext(), MainActivity.class);
-            startActivity(intent3);
-        }
-
         botaoMandar.setOnClickListener(view -> {
-            Intent intent2 = new Intent(getApplicationContext(), SelecionarPessoa.class);
-            intent2.putExtra("sharedText", TextoFinal);
-            startActivity(intent2);
+            if(TextoFinal == null){
+                Intent intent3 = new Intent(getApplicationContext(), MainActivity.class);
+                startActivity(intent3);
+            }else {
+                Intent intent2 = new Intent(getApplicationContext(), SelecionarPessoa.class);
+                intent2.putExtra("sharedText", TextoFinal);
+                startActivity(intent2);
+            }
         });
     }
     // Ler conteudo do txt
