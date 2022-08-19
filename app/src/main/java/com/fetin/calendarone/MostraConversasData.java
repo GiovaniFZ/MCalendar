@@ -7,11 +7,11 @@ import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.text.method.ScrollingMovementMethod;
 import android.util.Log;
-import android.view.Window;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class MostraConversasData extends AppCompatActivity {
@@ -32,7 +32,7 @@ public class MostraConversasData extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_receber_conversas);
 
-        setTitle("Conversas em " + dataOrg);
+        setTitle(getResources().getString(R.string.Conversas_em) + ' ' + dataOrg);
 
         TextView msgMostr = findViewById(R.id.msgMostr);
         msgMostr.setMovementMethod(new ScrollingMovementMethod());
@@ -61,7 +61,10 @@ public class MostraConversasData extends AppCompatActivity {
         Log.d("MostraMsgData: ", "Entrou na funcao mostraMsgData, datalength: " + dataComparar.length());
         StringBuilder mensagem2 = new StringBuilder();
         int comp = dataComparar.length();
-        // Pattern p = Pattern.compile("^[1-9][/][1-9][/][0-2][0-2]$");
+        Pattern en = Pattern.compile("^[1-9][/][1-9][/][0-2][0-2]$");
+        Pattern pt = Pattern.compile("^[0-9][0-9][/][0-9][0-9][/][0-2][0-2][0-2][0-2]$");
+        Matcher enMatcher;
+        Matcher ptMatcher;
         boolean encontrou = false; // A data ainda não foi encontrada
         int comparador;
 
@@ -80,7 +83,9 @@ public class MostraConversasData extends AppCompatActivity {
                     encontrou = true;
                     mensagem2.append('\n');
                 } else {
-                    if (encontrou) {
+                    enMatcher = en.matcher(mensagem.substring(i,i+ comp));
+                    ptMatcher = pt.matcher(mensagem.substring(i,i+ comp));
+                    if((enMatcher.matches() || ptMatcher.matches()) && encontrou){ // Se a proxima linha for uma data, e se ele já encontrou a data selecionada
                         break;
                     }
                 }

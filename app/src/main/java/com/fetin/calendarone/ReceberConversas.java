@@ -29,6 +29,8 @@ public class ReceberConversas extends AppCompatActivity {
         texto2.setMovementMethod(new ScrollingMovementMethod());
         FloatingActionButton botaoEnviar = findViewById(R.id.enviarBotao);
 
+        setTitle(getResources().getString(R.string.previa));
+
         Intent intent = getIntent();
         // Action: intent.action.SEND_MULTIPLE();
         // Type: text/*

@@ -8,13 +8,11 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
-import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.ArrayList;
 import java.util.Locale;
-import java.util.regex.Pattern;
 
 public class ListPessoasData extends AppCompatActivity {
 
@@ -66,7 +64,6 @@ public class ListPessoasData extends AppCompatActivity {
 
 
         ListarPessoas2(dataComparar);
-
         listViewPessoas.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent intent2 = new Intent(getApplicationContext(), MostraConversasData.class);

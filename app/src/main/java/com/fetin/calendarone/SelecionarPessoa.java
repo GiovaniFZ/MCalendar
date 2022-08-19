@@ -34,7 +34,7 @@ public class SelecionarPessoa extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_listapessoas);
 
-        setTitle("Selecionar pessoa");
+        setTitle(getResources().getString(R.string.selecionar_pessoa));
         listViewPessoas = findViewById(R.id.ListaPessoas);
         Button criarBot = findViewById(R.id.criarBot);
         EditText CampoPessoa = findViewById(R.id.campoPessoa);
@@ -46,10 +46,10 @@ public class SelecionarPessoa extends AppCompatActivity {
         criarBot.setOnClickListener(view -> {
             String NomeDigitado = CampoPessoa.getText().toString();
             if (NomeDigitado.isEmpty()) {
-                Toast.makeText(this, "Insira o nome da pessoa a ser criada!", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, getResources().getString(R.string.inserir_nome), Toast.LENGTH_SHORT).show();
             } else {
                 criarPessoa(NomeDigitado);
-                Toast.makeText(SelecionarPessoa.this, "Pessoa adicionada!", Toast.LENGTH_SHORT).show();
+                Toast.makeText(SelecionarPessoa.this, getResources().getString(R.string.pessoa_adicionada), Toast.LENGTH_SHORT).show();
                 ListarPessoas();
             }
         });
@@ -59,7 +59,7 @@ public class SelecionarPessoa extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 idSelecionado = arrayIds.get(position);
                 adicionarMensagem(idSelecionado, Mensagem);
-                Toast.makeText(SelecionarPessoa.this, "Mensagens adicionadas a " + nome(position) , Toast.LENGTH_LONG).show();
+                Toast.makeText(SelecionarPessoa.this, getResources().getString(R.string.mensagens_adicionadas_a) + ' ' + nome(position) , Toast.LENGTH_LONG).show();
                 Intent intent2 = new Intent(getApplicationContext(), MainActivity.class);
                 startActivity(intent2);
             }

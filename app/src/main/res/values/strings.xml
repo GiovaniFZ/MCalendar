@@ -2,7 +2,7 @@
     <string name="app_name">WhatsApp Calendar</string>
     <string name="Select">Selecionar data</string>
     <string name="TextoData">Crie pessoas, importe mensagens e selecione uma data!</string>
-    <string name="title_activity_conversas">Conversas</string>
+    <string name="title_activity_conversas">Conversa</string>
     <!-- Strings used for fragments for navigation -->
     <string name="first_fragment_label">First Fragment</string>
     <string name="second_fragment_label">Second Fragment</string>
@@ -11,16 +11,25 @@
 
     <string name="hello_first_fragment">Hello first fragment</string>
     <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
-    <string name="digitarNome">Criar pessoa...</string>
+    <string name="digitarNome">Criar pessoa…</string>
     <string name="renomear">Renomear</string>
     <string name="salvar">Salvar</string>
     <string name="excluir">Excluir</string>
     <string name="pessoa_selecionada">Pessoa Selecionada:</string>
-    <string name="digite_o_novo_nome_da_pessoa">Digite o novo nome da pessoa...</string>
+    <string name="digite_o_novo_nome_da_pessoa">Digite o novo nome da pessoa…</string>
+    <string name="selecionar_pessoa">Selecionar pessoa…</string>
+    <string name="pessoa_deletada">Pessoa deletada!</string>
     <string name="criar">Criar</string>
     <string name="erroum">Nenhum conteudo a ser exibido!</string>
     <string name="nada_a_ser_mostrado_importe_mensagens">Nada a ser mostrado! Importe mensagens.</string>
+    <string name="inserir_nome">"Insira o nome da pessoa a ser criada!"</string>
+    <string name="pessoa_adicionada">"Pessoa adicionada!"</string>
     <string name="abrir_arquivo">Abrir txt</string>
+    <string name="mensagens_adicionadas_a">Mensagens adicionadas a </string>
     <string name = "Tutorial">Tutorial</string>
+    <string name = "Conversas">Mensagens</string>
+    <string name = "previa">Previa</string>
+    <string name = "ListaDePessoas">Lista de pessoas</string>
+    <string name = "Conversas_em">Mensagens em </string>
     <string name = "howtouse">Como utilizar</string>
 </resources>

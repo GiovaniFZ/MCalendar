@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">WhatsApp Calendar</string>
+    <string name="Select">Select date</string>
+    <string name="TextoData">Create people, import messages and select a date!</string>
+    <string name="title_activity_conversas">Conversation</string>
+    <string name="digitarNome">Create person…</string>
+    <string name="first_fragment_label">First Fragment</string>
+    <string name="second_fragment_label">Second Fragment</string>
+    <string name="next">Next</string>
+    <string name="previous">Previous</string>
+    <string name="hello_first_fragment">Hello first fragment</string>
+    <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
+    <string name="renomear">Rename</string>
+    <string name="salvar">Save</string>
+    <string name="excluir">Delete</string>
+    <string name="pessoa_selecionada">Person selected:</string>
+    <string name="criar">Create</string>
+    <string name="digite_o_novo_nome_da_pessoa">Type the new person\'s name…</string>
+    <string name="selecionar_pessoa">Select person…</string>
+    <string name="pessoa_deletada">Person deleted!</string>
+    <string name="erroum">No content</string>
+    <string name="nada_a_ser_mostrado_importe_mensagens">Nothing to be shown. Import messages!</string>
+    <string name="inserir_nome">"Insert person\'s name!"</string>
+    <string name="pessoa_adicionada">"Person added!"</string>
+    <string name="abrir_arquivo">Open TXT</string>
+    <string name="Tutorial">Tutorial</string>
+    <string name="mensagens_adicionadas_a">Messages added to </string>
+    <string name = "Conversas">Messages</string>
+    <string name = "previa">Preview</string>
+    <string name = "ListaDePessoas">People list</string>
+    <string name = "Conversas_em">Messages in </string>
+    <string name="howtouse">How to use</string>
+</resources>

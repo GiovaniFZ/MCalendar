@@ -52,7 +52,7 @@ public class ListaPessoas extends AppCompatActivity {
         criarBancoDados();
         ListarPessoas();
 
-        setTitle("Lista de pessoas");
+        setTitle(getResources().getString(R.string.ListaDePessoas));
 
          criarBot.setOnClickListener(view -> {
             String NomeDigitado = CampoPessoa.getText().toString();
@@ -89,7 +89,7 @@ public class ListaPessoas extends AppCompatActivity {
                 .setPositiveButton("Sim", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
                         deletar(posicao);
-                        Toast.makeText(ListaPessoas.this, "Pessoa deletada!", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(ListaPessoas.this, getResources().getString(R.string.pessoa_deletada), Toast.LENGTH_SHORT).show();
                         ListarPessoas();
                     }
                 })
@@ -173,7 +173,7 @@ public class ListaPessoas extends AppCompatActivity {
         cur.moveToPosition(position);
         String Mensagem = cur.getString(cur.getColumnIndex(COLUNA_MENSAGENS));
         if(Mensagem == null){
-            Toast.makeText(ListaPessoas.this, "Nada a ser mostrado! Importe mensagens.", Toast.LENGTH_LONG).show();
+            Toast.makeText(ListaPessoas.this, getResources().getString(R.string.nada_a_ser_mostrado_importe_mensagens), Toast.LENGTH_LONG).show();
             return null;
         }
         else{

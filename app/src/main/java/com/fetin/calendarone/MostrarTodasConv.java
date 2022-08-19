@@ -16,6 +16,7 @@ public class MostrarTodasConv extends AppCompatActivity {
 
         Intent intent = getIntent();
         String msgMandada = intent.getStringExtra("msgMandada");
+        setTitle(getResources().getString(R.string.Conversas));
         mensagem.setText(msgMandada);
     }
 }

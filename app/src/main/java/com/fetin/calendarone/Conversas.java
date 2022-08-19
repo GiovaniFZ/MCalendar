@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.text.method.ScrollingMovementMethod;
 import android.widget.TextView;
+import android.widget.Toast;
 
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -25,7 +26,7 @@ public class Conversas extends AppCompatActivity {
 
     private TextView texto2;
     private static final int READ_REQUEST_CODE = 42;
-    String TextoFinal;
+    String TextoFinal = null;
     FloatingActionButton botaoMandar;
 
     @Override
@@ -36,7 +37,15 @@ public class Conversas extends AppCompatActivity {
         texto2.setMovementMethod(new ScrollingMovementMethod());
         botaoMandar = findViewById(R.id.enviarBotao);
 
+        setTitle(getResources().getString(R.string.previa));
+
         BuscarArquivo();
+
+        if(TextoFinal == null){
+            Intent intent3 = new Intent(getApplicationContext(), MainActivity.class);
+            startActivity(intent3);
+        }
+
         botaoMandar.setOnClickListener(view -> {
             Intent intent2 = new Intent(getApplicationContext(), SelecionarPessoa.class);
             intent2.putExtra("sharedText", TextoFinal);
