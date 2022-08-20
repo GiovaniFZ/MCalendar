@@ -11,6 +11,7 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import java.util.Locale;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -58,13 +59,16 @@ public class MostraConversasData extends AppCompatActivity {
     }
 
     String mostraMsgData(String dataComparar) {
-        Log.d("MostraMsgData: ", "Entrou na funcao mostraMsgData, datalength: " + dataComparar.length());
         StringBuilder mensagem2 = new StringBuilder();
         int comp = dataComparar.length();
-        Pattern en = Pattern.compile("^[1-9][/][1-9][/][0-2][0-2]$");
-        Pattern pt = Pattern.compile("^[0-9][0-9][/][0-9][0-9][/][0-2][0-2][0-2][0-2]$");
-        Matcher enMatcher;
-        Matcher ptMatcher;
+        Pattern pt;
+        if(Locale.getDefault().getDisplayLanguage().equals("English")) {
+            pt = Pattern.compile("^[1-9]+[/][1-9]+[/][0-2][0-2]$");
+        }
+        else{
+            pt = Pattern.compile("^[0-9][0-9][/][0-9][0-9][/][0-2][0-2][0-2][0-2]$");
+        }
+
         boolean encontrou = false; // A data ainda não foi encontrada
         int comparador;
 
@@ -79,20 +83,24 @@ public class MostraConversasData extends AppCompatActivity {
 
             if (comparador == 0 && i + comp <= mensagem.length()) { // Se houve quebra de linha
                 i++;
+                boolean data = pt.matcher(mensagem.substring(i, i+comp)).matches();
+
                 if (mensagem.substring(i, i + comp).equals(dataComparar)) { // Caso os proximos caracteres sejam a data selecionada
                     encontrou = true;
                     mensagem2.append('\n');
-                } else {
-                    enMatcher = en.matcher(mensagem.substring(i,i+ comp));
-                    ptMatcher = pt.matcher(mensagem.substring(i,i+ comp));
-                    if((enMatcher.matches() || ptMatcher.matches()) && encontrou){ // Se a proxima linha for uma data, e se ele já encontrou a data selecionada
+                }else{
+                    if(encontrou && data) { // Caso ele ja tenha encontrado a data, e os proximos caracteres sejam a data, mas não sejam a selecionada
                         break;
+                    }else {
+                        if (encontrou && !data) { // Caso ele já tenha encontrado a data, mas os proximos caracteres não sejam uma data
+                            mensagem2.append('\n');
+                        }
                     }
                 }
             }
-                if (encontrou) {
-                    mensagem2.append(mensagem.charAt(i));
-                }
+            if (encontrou) {
+                mensagem2.append(mensagem.charAt(i));
+            }
         }
         return mensagem2.toString();
     }

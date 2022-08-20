@@ -31,5 +31,8 @@
     <string name = "previa">Previa</string>
     <string name = "ListaDePessoas">Lista de pessoas</string>
     <string name = "Conversas_em">Mensagens em </string>
+    <string name = "deseja_excluir">Deseja Excluir</string>
+    <string name = "sim">Sim</string>
+    <string name = "nao">Não</string>
     <string name = "howtouse">Como utilizar</string>
 </resources>

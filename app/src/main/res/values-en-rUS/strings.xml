@@ -30,5 +30,8 @@
     <string name = "previa">Preview</string>
     <string name = "ListaDePessoas">People list</string>
     <string name = "Conversas_em">Messages in </string>
+    <string name = "deseja_excluir">Do you want to delete</string>
+    <string name = "sim">Yes</string>
+    <string name = "nao">No</string>
     <string name="howtouse">How to use</string>
 </resources>

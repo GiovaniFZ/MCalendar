@@ -56,8 +56,21 @@ public class ListPessoasData extends AppCompatActivity {
             dataOrg = diaToString + "/" + mesToString + "/" + anoToString;
             setTitle(dataOrg); // Colocando o titulo da activity como o dia selecionado
         }else {
-            String mesPt = '0' + mesToString;
-            dataComparar = diaToString + "/" + mesPt + "/" + anoToString;
+            String mesPt;
+            String diaPt;
+
+            if(mes < 10){
+                mesPt = '0' + mesToString;
+            }else{
+                mesPt = mesToString;
+            }
+
+            if(dia < 10){
+                diaPt = '0' + diaToString;
+            }else{
+                diaPt = diaToString;
+            }
+            dataComparar = diaPt + "/" + mesPt + "/" + anoToString;
             dataOrg = dataComparar;
             setTitle(dataComparar);
         }

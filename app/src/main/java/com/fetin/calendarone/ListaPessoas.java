@@ -85,15 +85,15 @@ public class ListaPessoas extends AppCompatActivity {
 
     public Dialog FuncaoOpcoes(String NomePessoa, Integer posicao) {
         AlertDialog.Builder builder = new AlertDialog.Builder(ListaPessoas.this);
-        builder.setMessage("Deseja Excluir " + NomePessoa + "?")
-                .setPositiveButton("Sim", new DialogInterface.OnClickListener() {
+        builder.setMessage(getResources().getString(R.string.deseja_excluir)+ " " + NomePessoa + "?")
+                .setPositiveButton(getResources().getString(R.string.sim), new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
                         deletar(posicao);
                         Toast.makeText(ListaPessoas.this, getResources().getString(R.string.pessoa_deletada), Toast.LENGTH_SHORT).show();
                         ListarPessoas();
                     }
                 })
-                .setNegativeButton("Não", new DialogInterface.OnClickListener() {
+                .setNegativeButton(getResources().getString(R.string.nao), new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int id) {
                                 ListarPessoas();
                             }
