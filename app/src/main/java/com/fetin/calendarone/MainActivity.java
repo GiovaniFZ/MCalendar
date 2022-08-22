@@ -4,9 +4,12 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.DialogFragment;
 
 import android.Manifest;
+import android.app.AlertDialog;
 import android.app.DatePickerDialog;
+import android.app.Dialog;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -73,15 +76,22 @@ public class MainActivity extends AppCompatActivity implements DatePickerDialog.
     }
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle item selection
-        switch (item.getItemId()) {
-            case R.id.tutorial:
-                Intent intent = new Intent(this, Tutorial.class);
-                startActivity(intent);
-                return true;
-            default:
-                return super.onOptionsItemSelected(item);
+        if (item.getItemId() == R.id.tutorial) {
+            Dialog dialogo = AbrirDialogoUrl();
+            dialogo.show();
         }
+        return super.onOptionsItemSelected(item);
     }
 
-
+    public Dialog AbrirDialogoUrl(){
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setMessage(getResources().getString(R.string.AbrirTut))
+                .setPositiveButton(getResources().getString(R.string.sim), (dialog, id) -> {
+                    String url = "https://drive.google.com/file/d/17BKoyRGz0zBJPLG-P9_LiLSPr1DaXPIT/view?usp=sharing";
+                    Intent i = new Intent(Intent.ACTION_VIEW);
+                    i.setData(Uri.parse(url));
+                    startActivity(i);
+                });
+        return builder.create();
+    }
 }

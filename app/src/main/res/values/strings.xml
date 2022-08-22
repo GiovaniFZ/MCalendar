@@ -35,4 +35,5 @@
     <string name = "sim">Sim</string>
     <string name = "nao">Não</string>
     <string name = "howtouse">Como utilizar</string>
+    <string name = "AbrirTut">Deseja abrir o tutorial?</string>
 </resources>

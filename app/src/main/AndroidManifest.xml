@@ -55,10 +55,6 @@
             android:exported="true"/>
 
         <activity
-            android:name=".Tutorial"
-            android:exported="true"/>
-
-        <activity
             android:name=".MainActivity"
             android:exported="true">
             <intent-filter>

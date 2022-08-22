@@ -34,4 +34,5 @@
     <string name = "sim">Yes</string>
     <string name = "nao">No</string>
     <string name="howtouse">How to use</string>
+    <string name = "AbrirTut">Do you want to open the tutorial? (Only in portuguese)</string>
 </resources>
