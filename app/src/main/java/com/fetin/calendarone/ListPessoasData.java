@@ -4,8 +4,6 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
-import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
@@ -77,14 +75,12 @@ public class ListPessoasData extends AppCompatActivity {
 
 
         ListarPessoas2(dataComparar);
-        listViewPessoas.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent intent2 = new Intent(getApplicationContext(), MostraConversasData.class);
-                intent2.putExtra("dataComparar", dataComparar);
-                intent2.putExtra("dataOrg", dataOrg);
-                intent2.putExtra("position", position);
-                startActivity(intent2);
-            }
+        listViewPessoas.setOnItemClickListener((parent, view, position, id) -> {
+            Intent intent2 = new Intent(getApplicationContext(), MostraConversasData.class);
+            intent2.putExtra("dataComparar", dataComparar);
+            intent2.putExtra("dataOrg", dataOrg);
+            intent2.putExtra("position", position);
+            startActivity(intent2);
         });
 
     }
@@ -96,8 +92,8 @@ public class ListPessoasData extends AppCompatActivity {
             String query = "SELECT " + COLUNA_CODIGO + ", " + COLUNA_NOME + " FROM " + NOME_TABELA + " WHERE " +
                     COLUNA_MENSAGENS + " LIKE '%" + dataComparar + "%'";
             Cursor meuCursor = db.rawQuery(query, null);
-            ArrayList<String> linhas = new ArrayList<String>();
-            ArrayAdapter adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, android.R.id.text1, linhas
+            ArrayList<String> linhas = new ArrayList<>();
+            ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, android.R.id.text1, linhas
             );
             listViewPessoas.setAdapter(adapter);
             meuCursor.moveToFirst();
@@ -106,7 +102,7 @@ public class ListPessoasData extends AppCompatActivity {
                 arrayIds.add(meuCursor.getInt(0));
                 meuCursor.moveToNext();
             }
-
+                meuCursor.close();
         }catch (Exception e){
             e.printStackTrace();
         }

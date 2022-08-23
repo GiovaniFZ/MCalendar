@@ -6,8 +6,6 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteStatement;
 import android.os.Bundle;
-import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -55,14 +53,12 @@ public class SelecionarPessoa extends AppCompatActivity {
         });
 
 
-        listViewPessoas.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                idSelecionado = arrayIds.get(position);
-                adicionarMensagem(idSelecionado, Mensagem);
-                Toast.makeText(SelecionarPessoa.this, getResources().getString(R.string.mensagens_adicionadas_a) + ' ' + nome(position) , Toast.LENGTH_LONG).show();
-                Intent intent2 = new Intent(getApplicationContext(), MainActivity.class);
-                startActivity(intent2);
-            }
+        listViewPessoas.setOnItemClickListener((parent, view, position, id) -> {
+            idSelecionado = arrayIds.get(position);
+            adicionarMensagem(idSelecionado, Mensagem);
+            Toast.makeText(SelecionarPessoa.this, getResources().getString(R.string.mensagens_adicionadas_a) + ' ' + nome(position) , Toast.LENGTH_LONG).show();
+            Intent intent2 = new Intent(getApplicationContext(), MainActivity.class);
+            startActivity(intent2);
         });
     }
 
@@ -72,8 +68,8 @@ public class SelecionarPessoa extends AppCompatActivity {
             db = openOrCreateDatabase(BANCO_NOME, MODE_PRIVATE, null);
             String query = "SELECT " + COLUNA_CODIGO + ", " + COLUNA_NOME + " FROM " + NOME_TABELA;
             Cursor meuCursor = db.rawQuery(query, null);
-            ArrayList<String> linhas = new ArrayList<String>();
-            ArrayAdapter adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, android.R.id.text1, linhas
+            ArrayList<String> linhas = new ArrayList<>();
+            ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, android.R.id.text1, linhas
             );
             listViewPessoas.setAdapter(adapter);
             meuCursor.moveToFirst();
@@ -82,6 +78,7 @@ public class SelecionarPessoa extends AppCompatActivity {
                 arrayIds.add(meuCursor.getInt(0));
                 meuCursor.moveToNext();
             }
+            meuCursor.close();
         }catch (Exception e){
             e.printStackTrace();
         }
@@ -120,7 +117,9 @@ public class SelecionarPessoa extends AppCompatActivity {
         String query = "SELECT " + COLUNA_CODIGO + ", " + COLUNA_NOME + " FROM " + NOME_TABELA;
         Cursor cur = db.rawQuery(query, null);
         cur.moveToPosition(position);
-        return cur.getString(cur.getColumnIndex(COLUNA_NOME));
+        String string_fim = cur.getString(cur.getColumnIndex(COLUNA_NOME));
+        cur.close();
+        return string_fim;
     }
 
 

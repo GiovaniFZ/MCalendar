@@ -3,30 +3,21 @@ package com.fetin.calendarone;
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.app.Dialog;
-import android.content.ContentValues;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteStatement;
 import android.os.Bundle;
-import android.os.Parcelable;
-import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
-import android.widget.SimpleCursorAdapter;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
-import java.sql.Array;
 import java.util.ArrayList;
-import java.util.List;
 
 
 public class ListaPessoas extends AppCompatActivity {
@@ -65,39 +56,29 @@ public class ListaPessoas extends AppCompatActivity {
                     }
                 });
 
-        listViewPessoas.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                String msgMandada = AbreMensagem(position);
-                Intent intent2 = new Intent(getApplicationContext(), MostrarTodasConv.class);
-                intent2.putExtra("msgMandada", msgMandada);
-                startActivity(intent2);
-            }
+        listViewPessoas.setOnItemClickListener((parent, view, position, id) -> {
+            String msgMandada = AbreMensagem(position);
+            Intent intent2 = new Intent(getApplicationContext(), MostrarTodasConv.class);
+            intent2.putExtra("msgMandada", msgMandada);
+            startActivity(intent2);
         });
-        listViewPessoas.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener(){
-            public boolean onItemLongClick(AdapterView<?> arg0, View arg1, int pos, long id) {
-                String NomePessoa = (String) listViewPessoas.getItemAtPosition(pos);
-                Dialog dialogo = FuncaoOpcoes(NomePessoa, pos);
-                dialogo.show();
-                return true;
-            }
+        listViewPessoas.setOnItemLongClickListener((arg0, arg1, pos, id) -> {
+            String NomePessoa = (String) listViewPessoas.getItemAtPosition(pos);
+            Dialog dialogo = FuncaoOpcoes(NomePessoa, pos);
+            dialogo.show();
+            return true;
         });
     }
 
     public Dialog FuncaoOpcoes(String NomePessoa, Integer posicao) {
         AlertDialog.Builder builder = new AlertDialog.Builder(ListaPessoas.this);
         builder.setMessage(getResources().getString(R.string.deseja_excluir)+ " " + NomePessoa + "?")
-                .setPositiveButton(getResources().getString(R.string.sim), new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int id) {
-                        deletar(posicao);
-                        Toast.makeText(ListaPessoas.this, getResources().getString(R.string.pessoa_deletada), Toast.LENGTH_SHORT).show();
-                        ListarPessoas();
-                    }
+                .setPositiveButton(getResources().getString(R.string.sim), (dialog, id) -> {
+                    deletar(posicao);
+                    Toast.makeText(ListaPessoas.this, getResources().getString(R.string.pessoa_deletada), Toast.LENGTH_SHORT).show();
+                    ListarPessoas();
                 })
-                .setNegativeButton(getResources().getString(R.string.nao), new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog, int id) {
-                                ListarPessoas();
-                            }
-                        });
+                .setNegativeButton(getResources().getString(R.string.nao), (dialog, id) -> ListarPessoas());
         // Retorna o dialog
         return builder.create();
     }
@@ -120,8 +101,8 @@ public class ListaPessoas extends AppCompatActivity {
             db = openOrCreateDatabase(BANCO_NOME, MODE_PRIVATE, null);
             String query = "SELECT " + COLUNA_CODIGO + ", " + COLUNA_NOME + " FROM " + NOME_TABELA;
             Cursor meuCursor = db.rawQuery(query, null);
-            ArrayList<String> linhas = new ArrayList<String>();
-            ArrayAdapter adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, android.R.id.text1, linhas
+            ArrayList<String> linhas = new ArrayList<>();
+            ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, android.R.id.text1, linhas
             );
             listViewPessoas.setAdapter(adapter);
             meuCursor.moveToFirst();
@@ -130,6 +111,7 @@ public class ListaPessoas extends AppCompatActivity {
                 arrayIds.add(meuCursor.getInt(0));
                 meuCursor.moveToNext();
             }
+            meuCursor.close();
 
         }catch (Exception e){
             e.printStackTrace();
@@ -172,6 +154,7 @@ public class ListaPessoas extends AppCompatActivity {
         Cursor cur = db.rawQuery(query, null);
         cur.moveToPosition(position);
         String Mensagem = cur.getString(cur.getColumnIndex(COLUNA_MENSAGENS));
+        cur.close();
         if(Mensagem == null){
             Toast.makeText(ListaPessoas.this, getResources().getString(R.string.nada_a_ser_mostrado_importe_mensagens), Toast.LENGTH_LONG).show();
             return null;
