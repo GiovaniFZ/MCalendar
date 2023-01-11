@@ -1,4 +1,4 @@
 # MCalendar
 WhatsApp Calendar
 
-One of the worst projects on 41 Fetin.
+App to show the date of a conversation.
